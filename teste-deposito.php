@@ -16,7 +16,7 @@ $contaCorrente = new ContaCorrente(
 );
 
 try {
-    $contaCorrente->deposita(-100);
+    $contaCorrente->deposita(100);
 } catch (\InvalidArgumentException $exception) {
     echo "Valor a depositar precisa ser positivo";
 }

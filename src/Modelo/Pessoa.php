@@ -2,12 +2,16 @@
 
 namespace Alura\Banco\Modelo;
 
+use Alura\Banco\Modelo\Exception\TamanhoMinimoNomePessoaException;
+
 abstract class Pessoa
 {
     use AcessoPropriedades;
 
     protected $nome;
     private $cpf;
+
+    private const TAMANHO_MINIMO_NOME_PESSOA = 5;
 
     public function __construct(string $nome, CPF $cpf)
     {
@@ -28,9 +32,8 @@ abstract class Pessoa
 
     final protected function validaNome(string $nomeTitular)
     {
-        if (strlen($nomeTitular) < 5) {
-            echo "Nome precisa ter pelo menos 5 caracteres";
-            exit();
+        if (strlen($nomeTitular) < self::TAMANHO_MINIMO_NOME_PESSOA) {
+            throw new TamanhoMinimoNomePessoaException(self::TAMANHO_MINIMO_NOME_PESSOA);
         }
     }
 }
